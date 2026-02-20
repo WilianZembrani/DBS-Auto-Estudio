@@ -6,11 +6,11 @@
 .add-form {
   display: flex;
   flex-direction: column;
-  background-color: #d9020210;
+  background-color: #f6e8e8;
   margin-left: 70px;
   margin-top: 20px;
   padding: 20px;
-  width: 600px;
+  width: 650px;
   border-radius: 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
@@ -50,4 +50,6 @@
 
 .btn-add:hover {
   background-color: #c00b3f;
+  opacity: 0.9;
+  transform: translateY(-1px);
 }

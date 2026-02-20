@@ -4,7 +4,7 @@ function Add() {
     return (
         <div className="Add">
             <form className="add-form">
-                <h1 className="title">Adicionar Serviço</h1>
+                <h1 className="title">Cadastre um novo serviço</h1>
                 <div>
                     <label htmlFor="serviceName">Nome do Serviço: </label>
                     <input type="text" id="serviceName" name="serviceName" required />

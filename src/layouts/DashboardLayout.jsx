@@ -1,29 +1,18 @@
-import { useState } from "react";
-import './Dashboardlayout.css';
+import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import Sidebar from "../components/Sidebar/Sidebar";
-import Add from "../pages/Add/Add";
-
+import './DashboardLayout.css'
 
 function DashboardLayout() {
-    const [activePage, setActivePage] = useState('addService');
-
-    const renderPage = () => {
-        switch (activePage) {
-            case 'addService':
-                return <Add />;
-            default:
-                return <div>Bem-vindo ao Dashboard!</div>;
-        }
-    }
-
     return (
         <div className="dashboard-container">
             <Navbar />
+
             <div className="dashboard-main">
-                <Sidebar setActivePage={setActivePage} />
+                <Sidebar />
+
                 <div className="dashboard-content">
-                    {renderPage()}
+                    <Outlet />
                 </div>
             </div>
         </div>
