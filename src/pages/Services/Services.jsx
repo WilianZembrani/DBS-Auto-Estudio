@@ -17,7 +17,7 @@ function Services() {
 
     return (
         <div className="services">
-            <h1>Servicos</h1>
+            <h1>Serviços</h1>
             <p>Esta é a página de serviços. Aqui você pode visualizar e gerenciar os serviços disponíveis.</p>
             <div className="navbar-secondary">
 
@@ -63,8 +63,8 @@ function Services() {
                         <td>Substituição do óleo do motor</td>
                         <td>R$ 150,00</td>
                         <td className='actions'>
-                            <img src={editIcon} alt="Editar" />
-                            <img src={trashIcon} alt="Excluir" />
+                            <img className="edit-icon" src={editIcon} alt="Editar" />
+                            <img className="trash-icon" src={trashIcon} alt="Excluir" />
                         </td>
                     </tr>
                 </thead>
