@@ -7,7 +7,7 @@ function Add() {
                 <h1 className="title">Cadastre um novo serviço</h1>
                 <div>
                     <label htmlFor="serviceName">Nome do Serviço: </label>
-                    <input type="text" id="serviceName" name="serviceName" required />
+                    <input placeholder="Digite aqui" type="text" id="serviceName" name="serviceName" required />
                 </div>
                 <div>
                     <label htmlFor="serviceCategory">Categoria: </label>
@@ -20,11 +20,11 @@ function Add() {
                 </div>
                 <div>
                     <label htmlFor="serviceDescription">Descrição do Serviço:</label>
-                    <textarea id="serviceDescription" name="serviceDescription" required></textarea>
+                    <textarea placeholder="Digite a descrição aqui" id="serviceDescription" name="serviceDescription" required></textarea>
                 </div>
                 <div>
                     <label htmlFor="servicePrice">Preço do Serviço:</label>
-                    <input type="number" id="servicePrice" name="servicePrice" required />
+                    <input placeholder="0" type="number" id="servicePrice" name="servicePrice" required />
                 </div>
                 <button className="btn-add" type="submit">Adicionar</button>
             </form >

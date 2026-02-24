@@ -1,5 +1,4 @@
 .add-product {
-  margin: 10px;
   height: 95vh;
   background-color: #f3f4f6;
   padding: 20px;
@@ -70,7 +69,7 @@
 .fields-section input,
 .fields-section textarea,
 .fields-section select {
-  width: 900px;
+  width: 800px;
   color: #252525;
   margin-top: 4px;
   padding: 4px;

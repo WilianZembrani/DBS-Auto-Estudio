@@ -6,7 +6,9 @@ import Add from "./pages/Add/Add.jsx";
 import Services from "./pages/Services/Services.jsx";
 import Employees from "./pages/Employees/Employees.jsx";
 import AddProduct from "./pages/AddProduct/AddProduct.jsx";
+import ListProduct from "./pages/ListProduct/ListProduct.jsx";
 import DashboardLayout from "./Layouts/Dashboardlayout.jsx";
+
 
 function App() {
     return (
@@ -20,6 +22,7 @@ function App() {
                     <Route path="services" element={<Services />} />
                     <Route path="employees" element={<Employees />} />
                     <Route path="add-product" element={<AddProduct />} />
+                    <Route path="products" element={<ListProduct />} />
                 </Route>
             </Routes>
         </BrowserRouter>
