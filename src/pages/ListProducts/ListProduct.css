@@ -1,6 +1,7 @@
 .list {
   background-color: white;
   margin-top: 15px;
+  border-radius: 5px;
 }
 
 .list-product p {

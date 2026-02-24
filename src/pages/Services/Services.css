@@ -2,7 +2,7 @@
   padding: 20px;
   background-color: #f3f4f6;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -16,6 +16,7 @@
   display: flex;
   align-items: center;
 }
+
 .search-group input {
   padding-left: 40px;
   height: 37px;
@@ -42,6 +43,7 @@
 
 .employee,
 .category {
+  color: #828282;
   height: 37px;
   border: 1px solid #e2e2e2;
   border-radius: 4px;
