@@ -105,6 +105,6 @@
 }
 .add-product-form button:hover {
   background-color: #c00b3f;
+  transform: scale(1.03);
   opacity: 0.9;
-  transform: translateY(-1px);
 }

@@ -13,6 +13,9 @@
   border-spacing: 0 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
+.list-table td:nth-child(4) {
+  max-width: 300px;
+}
 .table-wrapper {
   max-height: 350px;
   overflow-y: auto;
@@ -34,6 +37,9 @@
   background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.list-table tbody tr:hover {
+  background: #f9fafb;
+}
 
 .list-head {
   text-align: center;
@@ -51,6 +57,9 @@
 .list-actions img {
   width: 25px;
   margin: 2px;
-
   cursor: pointer;
+}
+.list-actions img:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
 }

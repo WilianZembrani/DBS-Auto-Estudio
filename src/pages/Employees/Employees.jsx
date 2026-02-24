@@ -5,7 +5,7 @@ import editIcon from "../../assets/edit-icon.png";
 
 function Employees() {
 
-    const totalEmployees = 12;
+    const totalEmployees = 1;
     return (
         <div className="employees">
             <h1>Funcionários</h1>

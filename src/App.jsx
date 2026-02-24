@@ -8,6 +8,7 @@ import Employees from "./pages/Employees/Employees.jsx";
 import AddProduct from "./pages/AddProduct/AddProduct.jsx";
 import ListProduct from "./pages/ListProduct/ListProduct.jsx";
 import DashboardLayout from "./Layouts/Dashboardlayout.jsx";
+import Orders from "./pages/Orders/Orders.jsx";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                     <Route path="employees" element={<Employees />} />
                     <Route path="add-product" element={<AddProduct />} />
                     <Route path="products" element={<ListProduct />} />
+                    <Route path="orders" element={<Orders />} />
                 </Route>
             </Routes>
         </BrowserRouter>
