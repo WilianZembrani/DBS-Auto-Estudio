@@ -1,0 +1,75 @@
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+/* campo com ícone */
+.register-field {
+  display: flex;
+  align-items: center;
+}
+
+.register-field-icon {
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  background-color: #de0d50;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+/* input */
+.register-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  outline: none;
+  font-size: 14px;
+}
+
+.register-input:focus {
+  border-color: #de0d50;
+}
+
+/* texto auxiliar */
+.register-helper {
+  font-size: 13px;
+  color: #555;
+  text-align: left;
+}
+
+/* botão */
+.register-button {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #de0d50;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.register-button:hover {
+  background-color: #c00b3f;
+  transform: scale(1.02);
+}
+
+/* link login */
+.register-login-link {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #444;
+}
+
+.register-login-link a {
+  color: #8e0530;
+  text-decoration: none;
+  font-weight: 600;
+}

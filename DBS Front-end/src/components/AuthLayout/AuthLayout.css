@@ -1,0 +1,40 @@
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  background:
+    radial-gradient(circle at 20% 20%, #e55c87, transparent 40%),
+    radial-gradient(circle at 80% 30%, #de0d50, transparent 40%),
+    radial-gradient(circle at 70% 80%, #5d031f, transparent 50%), #21040d;
+}
+
+.auth-container {
+  width: 400px;
+  padding: 32px;
+  border-radius: 45px;
+  background-color: #c0b9cc;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.auth-icon {
+  width: 110px;
+  margin-bottom: 10px;
+}
+
+.auth-title {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.auth-subtitle {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.auth-content {
+  margin-top: 10px;
+}

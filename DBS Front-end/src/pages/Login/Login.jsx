@@ -13,6 +13,10 @@ function Login() {
         navigate('/');
     }
 
+    function handleCreate(event) {
+        event.preventDefault();
+        navigate('/Register')
+    }
 
 
 
@@ -32,7 +36,7 @@ function Login() {
                     <p><a href="">Não sei minha senha</a></p>
                 </form>
                 <button onClick={handleSubmit} className='btn-login'>Entrar</button>
-                <p className='create'>Novo por aqui? <a className='create-link' href="">Criar conta agora</a></p>
+                <p className='create'>Novo por aqui? <a className='create-link' onClick={handleCreate}>Criar conta agora</a></p>
             </div >
         </div >
     )
