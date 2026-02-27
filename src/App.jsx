@@ -5,8 +5,8 @@ import Dashboard from "./pages/Dashboard/Dashboard.jsx"
 import Add from "./pages/Add/Add.jsx";
 import Services from "./pages/Services/Services.jsx";
 import Employees from "./pages/Employees/Employees.jsx";
-import AddProduct from "./pages/AddProduct/AddProduct.jsx";
-import ListProduct from "./pages/ListProduct/ListProduct.jsx";
+import AddProduct from "./pages/AddProducts/AddProduct.jsx";
+import ListProduct from "./pages/ListProducts/ListProduct.jsx";
 import DashboardLayout from "./Layouts/Dashboardlayout.jsx";
 import Orders from "./pages/Orders/Orders.jsx";
 

@@ -15,7 +15,7 @@ function Orders() {
                         Coronel Freitas, SC, Brasil, 89840-000
                         49999179018</p>
                 </div>
-                <div>
+                <div className=''>
                     <p>Produtos: 1</p>
                     <p>Método: Boleto</p>
                     <p>Pagamento : Pendente</p>
