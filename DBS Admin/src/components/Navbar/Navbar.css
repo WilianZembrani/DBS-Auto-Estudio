@@ -7,9 +7,10 @@
 
 img {
   width: 300px;
+  cursor: pointer;
 }
 
-.nav-cnt button {
+.nav-cnt .nav-btn {
   cursor: pointer;
   font-size: 15px;
   margin-right: 100px;
@@ -20,7 +21,7 @@ img {
   background-color: #df0e51;
 }
 
-.nav-cnt button:hover {
+.nav-cnt .nav-btn:hover {
   transform: scale(1.04);
   background-color: #d50f4e;
 }

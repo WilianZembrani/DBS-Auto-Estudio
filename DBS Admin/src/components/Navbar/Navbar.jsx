@@ -6,16 +6,19 @@ function Navbar() {
 
     const navigate = useNavigate()
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        navigate('/login')
+    function handleLogout() {
+        navigate('/login');
+    }
+
+    function handleLogo() {
+        navigate('/dashboard');
     }
 
 
     return (
         <div className='nav-cnt'>
-            <img src={logoIcon} alt="" />
-            <button onClick={handleSubmit} >Sair</button >
+            <img onClick={handleLogo} src={logoIcon} alt="" />
+            <button className='nav-btn' onClick={handleLogout} >Sair</button >
         </div>
     )
 }
