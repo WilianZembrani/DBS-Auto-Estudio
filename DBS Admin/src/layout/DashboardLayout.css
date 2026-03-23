@@ -1,0 +1,7 @@
+.dash-cnt {
+  display: flex;
+}
+
+main {
+  flex: 1;
+}
