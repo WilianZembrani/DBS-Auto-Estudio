@@ -7,15 +7,18 @@ import Sidebar from '../components/Sidebar/Sidebar'
 
 function DashboardLayout() {
     return (
-        <div className='dash-cnt'>
-            <Sidebar />
-            <Navbar />
+        <div className="dashboard">
+            <header><Navbar /></header>
 
-            <main>
-                <Outlet />
-            </main>
+            <div className="content">
+                <aside ><Sidebar /></aside>
+
+                <main className="main">
+                    <Outlet />
+                </main>
+            </div>
         </div>
-    )
+    );
 }
 
 export default DashboardLayout

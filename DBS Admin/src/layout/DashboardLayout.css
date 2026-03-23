@@ -1,7 +1,21 @@
-.dash-cnt {
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.dashboard {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1;
   display: flex;
 }
 
-main {
+.main {
   flex: 1;
+  padding: 20px;
+  background: #fafafa;
 }
