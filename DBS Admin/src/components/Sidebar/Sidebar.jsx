@@ -8,7 +8,7 @@ function Sidebar() {
         <div className='side-cnt'>
             <div className='side-buttons'>
                 <NavLink
-                    to="/dashboard/addservices"
+                    to="/dashboard/addservice"
                     className={({ isActive }) => isActive ? 'btn active' : 'btn'}
                 >
                     <img className="icon add" src={addIcon} />
