@@ -5,6 +5,7 @@ import DashboardLayout from './layout/DashboardLayout.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import AddService from './pages/AddService/AddService.jsx';
 import AllServices from './pages/AllServices/AllServices.jsx';
+import Employer from './pages/Employer/Employer.jsx';
 
 
 
@@ -18,6 +19,7 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path='addservice' element={<AddService />} />
           <Route path='services' element={<AllServices />} />
+          <Route path='employers' element={<Employer />} />
         </Route>
       </Routes>
     </BrowserRouter>

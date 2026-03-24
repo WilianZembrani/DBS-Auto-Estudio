@@ -15,7 +15,7 @@ function AllServices() {
                 </div>
 
                 <select className='category'>
-                    <option value="">Funcionario</option>
+                    <option value="">Funcionario..</option>
                     <option value="">Pedro</option>
                 </select>
 
@@ -25,23 +25,28 @@ function AllServices() {
             <div>
                 <table className='table'>
                     <thead>
-                        <th>Nome</th>
-                        <th>Categoria</th>
-                        <th>Preço</th>
-                        <th>Status</th>
-                        <th>Ações</th>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Categoria</th>
+                            <th>Preço</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <td>Troca de óleo</td>
-                        <td>Manutenção</td>
-                        <td>120</td>
-                        <td>Ativo</td>
-                        <td>
-                            <div className='actions'>
-                                <img src={editIcon} />
-                                <img src={trashIcon} />
-                            </div>
-                        </td>
+                        <tr>
+                            <td>Troca de óleo</td>
+                            <td>Manutenção</td>
+                            <td>120</td>
+                            <td>Ativo</td>
+                            <td>
+                                <div className='actions'>
+                                    <img src={editIcon} />
+                                    <img src={trashIcon} />
+                                </div>
+                            </td>
+                        </tr>
+
                     </tbody>
                 </table>
             </div>
