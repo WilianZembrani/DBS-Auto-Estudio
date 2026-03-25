@@ -94,6 +94,7 @@
 .form-group input:focus,
 textarea:focus,
 select:focus {
+  background-color: #f6f6f6;
   border-color: #616161;
   outline: none;
 }

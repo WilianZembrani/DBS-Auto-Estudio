@@ -1,9 +1,7 @@
 import './AllServices.css'
-import trashIcon from '../../assets/trash-icon.png'
-import editIcon from '../../assets/edit-icon.png'
-import lupeIcon from '../../assets/lupa-icon.png'
 import { useNavigate } from 'react-router-dom';
-
+import SearchBar from '../../components/SearchBar/SearchBar';
+import ActionButtons from '../../components/ActionButtons/ActionButtons';
 
 function AllServices() {
 
@@ -21,10 +19,8 @@ function AllServices() {
             <p>Aqui nessa página você consegue acessar todos seus serviços</p>
             <div className='mini-nav'>
                 <div className='search-container'>
-                    <img className="icon" src={lupeIcon} alt="lupa" />
-                    <input type="text" placeholder='Buscar serviço..' />
+                    <SearchBar />
                 </div>
-
                 <select className='category'>
                     <option value="">Funcionario..</option>
                     <option value="">Pedro</option>
@@ -50,14 +46,8 @@ function AllServices() {
                             <td>Manutenção</td>
                             <td>120</td>
                             <td>Ativo</td>
-                            <td>
-                                <div className='actions'>
-                                    <img src={editIcon} />
-                                    <img src={trashIcon} />
-                                </div>
-                            </td>
+                            <td><ActionButtons /></td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>

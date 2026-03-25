@@ -1,0 +1,17 @@
+.product-list__actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.product-list__icon {
+  width: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0.8;
+}
+
+.product-list__icon:hover {
+  transform: scale(1.1);
+}

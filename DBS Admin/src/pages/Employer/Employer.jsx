@@ -1,7 +1,7 @@
 import './Employer.css'
 import perfilIcon from '../../assets/user-icon.png'
-import trashIcon from '../../assets/trash-icon.png'
-import editIcon from '../../assets/edit-icon.png'
+
+import ActionButtons from '../../components/ActionButtons/ActionButtons'
 
 function Employer() {
     return (
@@ -31,10 +31,7 @@ function Employer() {
                             <td>Funileiro</td>
                             <td>Pedro@gmail.com</td>
                             <td>490028922</td>
-                            <td className='actions'>
-                                <img src={editIcon} alt="Editar" />
-                                <img src={trashIcon} alt="Lixeira" />
-                            </td>
+                            <td><ActionButtons /></td>
                         </tr>
                     </tbody>
                 </table>

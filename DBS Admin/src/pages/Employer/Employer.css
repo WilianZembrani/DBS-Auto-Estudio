@@ -91,14 +91,3 @@
   text-align: center;
   background-color: white;
 }
-
-.actions img {
-  width: 30px;
-  margin-right: 2px;
-  transition: all 0.2s ease;
-  opacity: 0.8;
-}
-
-.actions img:hover {
-  transform: scale(1.05);
-}

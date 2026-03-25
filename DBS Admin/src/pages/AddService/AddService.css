@@ -25,17 +25,23 @@
 .form-servico input,
 textarea,
 select {
+  max-width: 900px;
   color: gray;
   border-radius: 6px;
-  border: 1px solid #666;
-  font-size: 20px;
+  border: 1px solid #bbb;
+  font-size: 18px;
   padding: 10px 10px;
   margin-top: 25px;
+}
+
+.form-servico select {
+  max-width: 300px;
 }
 
 .form-servico input:focus,
 textarea:focus,
 select:focus {
+  border-color: #616161;
   background-color: #f6f6f6;
   outline: none;
 }
@@ -49,7 +55,7 @@ select:focus {
   padding: 10px 8px;
   border: none;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   background-color: #df0e51;
   transition: all 0.2s ease;
