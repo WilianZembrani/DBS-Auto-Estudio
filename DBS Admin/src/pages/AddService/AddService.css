@@ -27,12 +27,18 @@ textarea,
 select {
   color: gray;
   border-radius: 6px;
-  border: none;
+  border: 1px solid #666;
   font-size: 20px;
   padding: 10px 10px;
   margin-top: 25px;
 }
 
+.form-servico input:focus,
+textarea:focus,
+select:focus {
+  background-color: #f6f6f6;
+  outline: none;
+}
 .form-value {
   width: 150px;
 }

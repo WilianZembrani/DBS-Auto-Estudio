@@ -19,7 +19,6 @@
 }
 
 .mini-nav {
-  margin-top: 20px;
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -48,6 +47,12 @@
   padding: 8px 0px 7px 55px;
   border-radius: 6px;
   border: 1px solid rgb(176, 176, 176);
+}
+
+.search-container input:focus {
+  border-color: #616161;
+  background-color: #f6f6f6;
+  outline: none;
 }
 
 .category {

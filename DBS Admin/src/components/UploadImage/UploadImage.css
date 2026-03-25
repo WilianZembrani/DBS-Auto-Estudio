@@ -1,0 +1,26 @@
+.upload-image {
+  aspect-ratio: 1/1;
+  width: 140px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgb(233, 233, 233);
+  border-radius: 10px;
+  border: 2px dashed #999;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.164);
+}
+
+.upload-image img {
+  width: 90px;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+}
+.upload-image:hover {
+  border: 2px dashed #757474;
+}
+
+.upload-image img:hover {
+  transform: scale(1.05);
+}

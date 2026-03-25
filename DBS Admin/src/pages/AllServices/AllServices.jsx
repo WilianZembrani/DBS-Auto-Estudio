@@ -2,8 +2,19 @@ import './AllServices.css'
 import trashIcon from '../../assets/trash-icon.png'
 import editIcon from '../../assets/edit-icon.png'
 import lupeIcon from '../../assets/lupa-icon.png'
+import { useNavigate } from 'react-router-dom';
+
 
 function AllServices() {
+
+    const navigate = useNavigate()
+
+    function handleClick() {
+        navigate('/dashboard/addservice')
+
+    }
+
+
     return (
         <div className='table-cnt'>
             <h1>Ver todos os servições</h1>
@@ -19,7 +30,7 @@ function AllServices() {
                     <option value="">Pedro</option>
                 </select>
 
-                <button>+ Novo Serviço</button>
+                <button onClick={handleClick}>+ Novo Serviço</button>
             </div>
 
             <div>
