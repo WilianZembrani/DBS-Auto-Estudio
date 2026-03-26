@@ -8,6 +8,7 @@ import AllServices from './pages/AllServices/AllServices.jsx';
 import Employer from './pages/Employer/Employer.jsx';
 import AddProduct from './pages/AddProduct/AddProduct.jsx';
 import ListProducts from './pages/ListProducts/ListProducts.jsx';
+import Orders from './pages/Orders/Orders.jsx';
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='employers' element={<Employer />} />
           <Route path='addproduct' element={<AddProduct />} />
           <Route path='listproducts' element={<ListProducts />} />
+          <Route path='orders' element={<Orders />} />
         </Route>
       </Routes>
     </BrowserRouter>

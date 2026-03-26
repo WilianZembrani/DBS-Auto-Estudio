@@ -15,7 +15,7 @@ function AllServices() {
 
     return (
         <div className='table-cnt'>
-            <h1>Ver todos os servições</h1>
+            <h1>Ver todos os serviços</h1>
             <p>Aqui nessa página você consegue acessar todos seus serviços</p>
             <div className='mini-nav'>
                 <div className='search-container'>

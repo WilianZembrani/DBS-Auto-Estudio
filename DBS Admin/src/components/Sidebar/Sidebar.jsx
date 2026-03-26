@@ -42,7 +42,7 @@ function Sidebar() {
                     <img className='icon see' src={orderIcon} />
                     Listar Produtos
                 </NavLink>
-                <NavLink to="/dashboard/products"
+                <NavLink to="/dashboard/orders"
                     className={({ isActive }) => isActive ? 'btn active' : 'btn'}>
                     <img className='icon see' src={orderIcon} />
                     Gerenciar Pedidos

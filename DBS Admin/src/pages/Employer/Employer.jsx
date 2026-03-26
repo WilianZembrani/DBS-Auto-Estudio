@@ -9,7 +9,7 @@ function Employer() {
             <h1>Funcionários</h1>
             <p>Esta é a página de funcionários</p>
             <div className='navbar'>
-                <img src={perfilIcon} alt="" />
+                <img className='navbar-icon' src={perfilIcon} alt="" />
                 <p><b>12</b> Funcionários registrados</p>
                 <button>Adicionar novo funcionário</button>
             </div>

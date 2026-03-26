@@ -6,7 +6,7 @@ function SearchBar() {
     return (
         <div className='search-container'>
             <img className="icon" src={lupeIcon} alt="lupa" />
-            <input type="text" placeholder='Buscar serviço..' />
+            <input type="text" placeholder='Pesquisar..' />
         </div>
     )
 }
