@@ -9,15 +9,20 @@ import Employer from './pages/Employer/Employer.jsx';
 import AddProduct from './pages/AddProduct/AddProduct.jsx';
 import ListProducts from './pages/ListProducts/ListProducts.jsx';
 import Orders from './pages/Orders/Orders.jsx';
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
   return (
     <BrowserRouter>
+
+      <ToastContainer />
+
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
+
         <Route path='/dashboard' element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
           <Route path='addservice' element={<AddService />} />
@@ -27,12 +32,10 @@ function App() {
           <Route path='listproducts' element={<ListProducts />} />
           <Route path='orders' element={<Orders />} />
         </Route>
+
       </Routes>
     </BrowserRouter>
-
   )
-
-
 }
 
 

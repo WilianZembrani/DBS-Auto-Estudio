@@ -1,36 +1,68 @@
 import './Login.css'
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react'
 import iconlogin from '../../assets/icon_login.png'
 import iconPessoa from '../../assets/Pessoa.png'
 import iconCadeado from '../../assets/cadeado.png'
-
+import { loginService } from '../../services/userService';
+import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
-    const navigate = useNavigate();
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        navigate('/dashboard');
+    const navigate = useNavigate()
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        try {
+            const result = await loginService({ email, password })
+            console.log(result);
+            toast.success("Login realizado com sucesso");
+            navigate("/dashboard");
+        } catch (error) {
+            toast.error("Email ou senha inválidos", error);
+        }
     }
 
     return (
         <div className="page">
             <div className='Login'>
                 <img className="icon-login" src={iconlogin} alt="Ícone de login" />
-                <form onSubmit={handleSubmit}>
+
+                <form onSubmit={handleLogin}>
                     <div className='Email'>
                         <img className='pessoa' src={iconPessoa} alt="Ícone de pessoa" />
-                        <input className='input-email   ' placeholder="Digite seu email" type="text" name="email" id="email" />
+                        <input
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className='input-email'
+                            placeholder="Digite seu email"
+                            type="email"
+                        />
                     </div>
+
                     <div className='Password'>
                         <img className='cadeado' src={iconCadeado} alt="Ícone de cadeado" />
-                        <input className='input-password' placeholder="Digite sua senha" type="password" name="password" id="password" />
+                        <input
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className='input-password'
+                            placeholder="Digite sua senha"
+                            type="password"
+                        />
                     </div>
+
                     <p><a href="">Não sei minha senha</a></p>
+
+                    <button type="submit" className='btn-login'>
+                        Entrar
+                    </button>
                 </form>
-                <button onClick={handleSubmit} className='btn-login'>Entrar</button>
-            </div >
-        </div >
+
+            </div>
+        </div>
     )
 }
 
