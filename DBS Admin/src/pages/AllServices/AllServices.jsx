@@ -2,8 +2,9 @@ import './AllServices.css'
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ActionButtons from '../../components/ActionButtons/ActionButtons';
-import { listOffices } from '../../services/officeService';
+import { listOffices, deleteOffice } from '../../services/officeService';
 import { useState, useEffect } from 'react';
+import { toast } from "react-toastify";
 
 function AllServices() {
 
@@ -24,7 +25,20 @@ function AllServices() {
         }
     }
 
+
+    const handleDelete = async (id) => {
+        deleteOffice(id)
+            .then(() => {
+                toast.success("Serviço deletado com sucesso");
+                loadOffices();
+            })
+            .catch((error) => {
+                toast.error("Erro ao deletar serviço", error);
+            });
+    }
+
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         loadOffices();
     }, []);
 
@@ -62,7 +76,12 @@ function AllServices() {
                                 <td>{office.description}</td>
                                 <td>{office.price}</td>
                                 <td>{office.status}</td>
-                                <td><ActionButtons /></td>
+                                <td>
+                                    <ActionButtons
+                                        onEdit={() => navigate('/dashboard/addservice', { state: office })}
+                                        onDelete={() => handleDelete(office.id)}
+                                    />
+                                </td>
                             </tr>
                         ))}
                     </tbody>

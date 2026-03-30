@@ -15,3 +15,5 @@ export async function loginService(dados) {
     throw error;
   }
 }
+
+export async function deleteOffice() {}
