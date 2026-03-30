@@ -1,5 +1,6 @@
+import { createOffice } from '../../services/officeService';
 import './AddService.css'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function AddService() {
 
@@ -7,24 +8,47 @@ function AddService() {
     const [descricao, setDescricao] = useState('');
     const [funcionario, setFuncionario] = useState('');
     const [valor, setValor] = useState('');
+    const [employees, setEmployees] = useState([]);
 
-    const handleSubmit = (e) => {
+
+    const loadEmployees = async () => {
+        const response = await fetch('http://localhost:3000/api/users/employees');
+        const data = await response.json();
+        setEmployees(data);
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
+
+
         if (!servico || !descricao || !funcionario || !valor) {
             alert("Preencha todos os campos!");
             return;
         }
 
-        const dados = {
-            servico,
-            descricao,
-            funcionario,
-            valor
-        }
 
-        console.log(dados);
+
+
+        await createOffice({
+            name: servico,
+            description: descricao,
+            price: valor,
+            employee_id: funcionario,
+            status: 'Ativo'
+        })
+
+        setServico(''),
+            setDescricao(''),
+            setFuncionario(''),
+            setValor('')
+
+
 
     }
+
+    useEffect(() => {
+        loadEmployees();
+    }, [])
 
     return (
         <div className='form-cnt'>
@@ -40,9 +64,12 @@ function AddService() {
                 <select value={funcionario} onChange={(e) => setFuncionario(e.target.value)}
                     placeholder='Funcionario..' name="" id="">
                     <option value="">Selecione um funcionário</option>
-                    <option value="">Pedro</option>
-                    <option value="">Alvares</option>
-                    <option value="">Cabral</option>
+
+                    {employees.map((emp) => (
+                        <option key={emp.id} value={emp.id}>
+                            {emp.name}
+                        </option>
+                    ))}
                 </select>
 
                 <input className='form-value' value={valor} onChange={(e) => setValor(e.target.value)} placeholder='Valor..' type="number" />

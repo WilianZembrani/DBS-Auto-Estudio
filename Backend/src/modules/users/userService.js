@@ -5,6 +5,11 @@ exports.list = (callback) => {
   db.query(sql, callback);
 };
 
+exports.listEmployees = (callback) => {
+  const sql = "SELECT id, name FROM users WHERE role = 'employee' ";
+  db.query(sql, callback);
+};
+
 exports.create = (dados, callback) => {
   const sql = "INSERT INTO users SET ?";
   db.query(sql, dados, callback);

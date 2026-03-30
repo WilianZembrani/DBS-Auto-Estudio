@@ -2,6 +2,8 @@ import './AllServices.css'
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ActionButtons from '../../components/ActionButtons/ActionButtons';
+import { listOffices } from '../../services/officeService';
+import { useState, useEffect } from 'react';
 
 function AllServices() {
 
@@ -9,9 +11,22 @@ function AllServices() {
 
     function handleClick() {
         navigate('/dashboard/addservice')
+    }
+    const [offices, setOffices] = useState([]);
 
+
+    const loadOffices = async () => {
+        try {
+            const data = await listOffices();
+            setOffices(data);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
+    useEffect(() => {
+        loadOffices();
+    }, []);
 
     return (
         <div className='table-cnt'>
@@ -34,20 +49,22 @@ function AllServices() {
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Categoria</th>
+                            <th>Descrição</th>
                             <th>Preço</th>
                             <th>Status</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Troca de óleo</td>
-                            <td>Manutenção</td>
-                            <td>120</td>
-                            <td>Ativo</td>
-                            <td><ActionButtons /></td>
-                        </tr>
+                        {offices.map((office) => (
+                            <tr key={office.id}>
+                                <td>{office.name}</td>
+                                <td>{office.description}</td>
+                                <td>{office.price}</td>
+                                <td>{office.status}</td>
+                                <td><ActionButtons /></td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

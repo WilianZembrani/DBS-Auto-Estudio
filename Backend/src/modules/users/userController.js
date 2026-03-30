@@ -9,6 +9,15 @@ exports.listUsers = (req, res) => {
   });
 };
 
+exports.listEmployees = (req, res) => {
+  userService.listEmployees((err, results) => {
+    if (err) {
+      return res.status(500).send("Não foi possivel listar os funcionarios");
+    }
+    res.status(200).json(results);
+  });
+};
+
 exports.login = (req, res) => {
   const { email, password } = req.body;
 
