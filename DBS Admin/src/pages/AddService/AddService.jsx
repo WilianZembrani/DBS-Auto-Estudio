@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { createOffice, updateOffice } from '../../services/officeService';
 import './AddService.css'
 import { useState, useEffect } from "react";

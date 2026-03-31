@@ -1,16 +1,35 @@
 import './Employer.css'
 import perfilIcon from '../../assets/user-icon.png'
+import { useState, useEffect } from 'react';
 
+import { listEmployees } from '../../services/userService';
 import ActionButtons from '../../components/ActionButtons/ActionButtons'
 
 function Employer() {
+
+    const [employees, setEmployees] = useState([]);
+
+    const loadEmployees = async () => {
+        try {
+            const data = await listEmployees();
+            setEmployees(data);
+        } catch (error) {
+            console.log(error);
+
+
+        }
+    }
+
+    useEffect(() => {
+        loadEmployees();
+    }, [])
     return (
         <div className='emp-cnt'>
             <h1>Funcionários</h1>
             <p>Esta é a página de funcionários</p>
             <div className='navbar'>
                 <img className='navbar-icon' src={perfilIcon} alt="" />
-                <p><b>12</b> Funcionários registrados</p>
+                <p><b>{employees.length}</b> Funcionários registrados</p>
                 <button>Adicionar novo funcionário</button>
             </div>
             <div>
@@ -18,21 +37,27 @@ function Employer() {
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Cargo</th>
                             <th>Email</th>
-                            <th>Telefone</th>
+
+                            <th>Cargo</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>Pedro</td>
-                            <td>Funileiro</td>
-                            <td>Pedro@gmail.com</td>
-                            <td>490028922</td>
-                            <td><ActionButtons /></td>
-                        </tr>
+                        {employees.map((employee) => (
+                            <tr key={employee.id}>
+                                <td>{employee.name}</td>
+                                <td>{employee.email}</td>
+                                <td>{employee.job_title}</td>
+                                <td>
+                                    <ActionButtons />
+                                </td>
+                            </tr>
+                        ))}
+
+
+
                     </tbody>
                 </table>
 
