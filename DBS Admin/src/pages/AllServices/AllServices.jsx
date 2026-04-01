@@ -67,6 +67,8 @@ function AllServices() {
                             <th>Preço</th>
                             <th>Status</th>
                             <th>Ações</th>
+                            <th>Funcionário</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -75,7 +77,9 @@ function AllServices() {
                                 <td>{office.name}</td>
                                 <td>{office.description}</td>
                                 <td>{office.price}</td>
+                                <td>{office.employee_name}</td>
                                 <td>{office.status}</td>
+
                                 <td>
                                     <ActionButtons
                                         onEdit={() => navigate('/dashboard/addservice', { state: office })}

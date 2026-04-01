@@ -13,6 +13,19 @@ exports.listEmployees = (callback) => {
   `;
   db.query(sql, callback);
 };
+
+exports.createEmployee = (dados, callback) => {
+  const sql = `
+    INSERT INTO users (name, email, password, job_title, role)
+    VALUES (?, ?, ?, ?, 'employee')
+  `;
+  db.query(
+    sql,
+    [dados.name, dados.email, dados.password, dados.job_title],
+    callback,
+  );
+};
+
 exports.create = (dados, callback) => {
   const sql = "INSERT INTO users SET ?";
   db.query(sql, dados, callback);

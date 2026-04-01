@@ -18,6 +18,32 @@ exports.listEmployees = (req, res) => {
   });
 };
 
+exports.createEmployee = (req, res) => {
+  const { name, email, job_title, password } = req.body;
+
+  if (!name || !email || !job_title || !password) {
+    return res.status(400).json({
+      message: "Preencha todos os campos",
+    });
+  }
+
+  userService.createEmployee(
+    { name, email, job_title, password },
+    (err, results) => {
+      if (err) {
+        console.log("ERRO:", err);
+        return res.status(500).json({
+          message: "Erro ao criar funcionário",
+        });
+      }
+
+      return res.status(201).json({
+        message: "Funcionário criado com sucesso",
+      });
+    },
+  );
+};
+
 exports.login = (req, res) => {
   const { email, password } = req.body;
 

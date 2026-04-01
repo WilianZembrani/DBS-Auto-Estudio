@@ -6,10 +6,10 @@
 }
 
 .product-list__icon {
-  width: 30px;
+  width: 25px;
   cursor: pointer;
   transition: all 0.2s ease;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .product-list__icon:hover {

@@ -4,6 +4,7 @@ const userController = require("./userController");
 
 router.post("/login", userController.login);
 router.get("/employees", userController.listEmployees);
+router.post("/employees", userController.createEmployee);
 
 router.get("/", userController.listUsers);
 router.post("/", userController.createUser);

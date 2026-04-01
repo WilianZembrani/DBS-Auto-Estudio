@@ -1,7 +1,15 @@
 const db = require("../../database/connection");
 
 exports.list = (callback) => {
-  const sql = "SELECT * FROM services";
+  const sql = `
+    SELECT 
+      services.*, 
+      users.name AS employee_name
+    FROM services
+    LEFT JOIN users 
+      ON services.employee_id = users.id
+  `;
+
   db.query(sql, callback);
 };
 
