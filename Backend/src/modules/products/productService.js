@@ -5,6 +5,8 @@ exports.list = (callback) => {
   db.query(sql, callback);
 };
 
+exports.list;
+
 exports.create = (dados, callback) => {
   const sql = "INSERT INTO products SET ?";
   db.query(sql, dados, callback);
