@@ -3,11 +3,16 @@ import UploadImage from '../../components/UploadImage/UploadImage'
 import './AddProduct.css'
 import { listCategories } from '../../services/categoryService'
 import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createProduct } from '../../services/productService';
+import { createProduct, updateProduct } from '../../services/productService';
 
 
 function AddProduct() {
+    const location = useLocation();
+    const productEdit = location.state;
+    const navigate = useNavigate();
+    const isEdit = productEdit ? true : false;
 
 
     const [categories, setCategories] = useState([]);
@@ -38,40 +43,62 @@ function AddProduct() {
 
 
         try {
-            await createProduct({
-                name,
-                category_id: Number(categoryId),
-                description,
-                stock: Number(stock),
-                price: Number(price)
-            });
+            if (isEdit) {
+                await updateProduct({
+                    id: productEdit.id,
+                    name,
+                    category_id: Number(categoryId),
+                    description,
+                    stock: Number(stock),
+                    price: Number(price)
+
+                });
+                toast.success("Produto atualizado com sucesso!");
+            } else {
+                await createProduct({
+                    name,
+                    category_id: Number(categoryId),
+                    description,
+                    stock: Number(stock),
+                    price: Number(price)
+                }
+                );
+                toast.success("Produto criado com sucesso!");
+                navigate("/dashboard/listproducts");
 
 
-
-            toast.success("Produto criado com sucesso!");
-
+            }
+            setName('');
+            setCategoryId('');
+            setDescription('');
+            setStock('');
+            setPrice('');
         } catch (error) {
             toast.error("Erro ao criar produto");
             console.error(error);
+
         }
-        setName('');
-        setCategoryId('');
-        setDescription('');
-        setStock('');
-        setPrice('');
 
     }
-
-
 
     useEffect(() => {
         loadCategories();
     }, [])
 
+    useEffect(() => {
+        if (productEdit) {
+            setName(productEdit.name);
+            setCategoryId(productEdit.category_id);
+            setDescription(productEdit.description);
+            setStock(productEdit.stock);
+            setPrice(productEdit.price);
+        }
+    }, [productEdit]);
+
 
     return (
         <div className='product-cnt'>
-            <h1>Adicionar Produto</h1>
+            <h1>{isEdit ? "Editar Produto" : "Adicionar Produto"}</h1>
             <p>Aqui você pode adicionar um novo produto a loja. Preencha os detalhes do Produto e clique em 'Adicionar' para salvar.</p>
 
             <div className='cnt-0'>
@@ -122,7 +149,7 @@ function AddProduct() {
                     </div>
 
                     <button className='submit-button' type='submit'>
-                        Adicionar
+                        {isEdit ? "Atualizar" : "Adicionar"}
                     </button>
 
                 </form>

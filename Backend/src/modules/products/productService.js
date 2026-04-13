@@ -1,7 +1,16 @@
 const db = require("../../database/connection");
 
 exports.list = (callback) => {
-  const sql = "SELECT * FROM products";
+  const sql = `
+  SELECT 
+    p.id,
+    p.name,
+    p.price,
+    p.stock,
+    COALESCE(c.name, 'Sem categoria') AS category
+  FROM products p
+  LEFT JOIN categories c ON p.category_id = c.id
+`;
   db.query(sql, callback);
 };
 

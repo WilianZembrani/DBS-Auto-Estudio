@@ -65,9 +65,10 @@ function AllServices() {
                             <th>Nome</th>
                             <th>Descrição</th>
                             <th>Preço</th>
+                            <th>Funcionário</th>
                             <th>Status</th>
                             <th>Ações</th>
-                            <th>Funcionário</th>
+
 
                         </tr>
                     </thead>
@@ -76,7 +77,7 @@ function AllServices() {
                             <tr key={office.id}>
                                 <td>{office.name}</td>
                                 <td>{office.description}</td>
-                                <td>{office.price}</td>
+                                <td>R$ {office.price}</td>
                                 <td>{office.employee_name}</td>
                                 <td>{office.status}</td>
 
