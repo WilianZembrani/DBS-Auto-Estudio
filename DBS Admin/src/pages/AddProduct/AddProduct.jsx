@@ -44,16 +44,18 @@ function AddProduct() {
 
         try {
             if (isEdit) {
-                await updateProduct({
-                    id: productEdit.id,
-                    name,
-                    category_id: Number(categoryId),
-                    description,
-                    stock: Number(stock),
-                    price: Number(price)
-
-                });
+                await updateProduct(
+                    productEdit.id,
+                    {
+                        name,
+                        category_id: Number(categoryId),
+                        description,
+                        stock: Number(stock),
+                        price: Number(price)
+                    }
+                );
                 toast.success("Produto atualizado com sucesso!");
+                navigate("/dashboard/listproducts");
             } else {
                 await createProduct({
                     name,

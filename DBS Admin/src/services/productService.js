@@ -11,8 +11,10 @@ export async function createProduct(dados) {
   return data;
 }
 
-export async function listProducts() {
-  const response = await fetch("http://localhost:3000/api/products/");
+export async function listProducts(search = "") {
+  const response = await fetch(
+    `http://localhost:3000/api/products?search=${search}`,
+  );
   if (!response.ok) {
     throw new Error("Erro ao listar produtos");
   }

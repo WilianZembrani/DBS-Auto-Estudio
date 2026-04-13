@@ -12,11 +12,12 @@ function ListProducts() {
 
     const navigate = useNavigate();
 
+    const [search, setSearch] = useState('');
     const [products, setProducts] = useState([]);
 
     const fetchProducts = async () => {
         try {
-            const data = await listProducts();
+            const data = await listProducts(search);
             setProducts(data);
         } catch (error) {
             console.error(error);
@@ -39,7 +40,7 @@ function ListProducts() {
 
     useEffect(() => {
         fetchProducts();
-    }, [])
+    }, [search]);
 
     return (
         <div className='product-list'>
@@ -51,7 +52,7 @@ function ListProducts() {
             <div className='product-list__content'>
 
                 <div className='product-list__filters'>
-                    <SearchBar />
+                    <SearchBar value={search} onChange={(e) => setSearch(e.target.value)} />
 
                     <div className='product-list__filter-actions'>
                         <select className='product-list__select'>

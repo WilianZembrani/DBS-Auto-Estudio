@@ -1,7 +1,9 @@
 const productService = require("./productService");
 
 exports.listProducts = (req, res) => {
-  productService.list((err, results) => {
+  const search = req.query.search || "";
+
+  productService.list(search, (err, results) => {
     if (err) {
       res.status(500).json({ error: "Erro ao listar produtos" });
     } else {

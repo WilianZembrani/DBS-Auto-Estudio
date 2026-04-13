@@ -1,21 +1,29 @@
 const db = require("../../database/connection");
+const { search } = require("./productRoutes");
 
-exports.list = (callback) => {
-  const sql = `
-  SELECT 
-    p.id,
-    p.name,
-    p.price,
-    p.stock,
-    COALESCE(c.name, 'Sem categoria') AS category
-  FROM products p
-  LEFT JOIN categories c ON p.category_id = c.id
-`;
-  db.query(sql, callback);
+exports.list = (search, callback) => {
+  let sql = `
+    SELECT 
+      p.id,
+      p.name,
+      p.price,
+      p.stock,
+      p.description, 
+      p.category_id, 
+      c.name AS category
+    FROM products p
+    LEFT JOIN categories c ON p.category_id = c.id
+  `;
+
+  let values = [];
+
+  if (search) {
+    sql += " WHERE p.name LIKE ?";
+    values.push(`%${search}%`);
+  }
+
+  db.query(sql, values, callback);
 };
-
-exports.list;
-
 exports.create = (dados, callback) => {
   const sql = "INSERT INTO products SET ?";
   db.query(sql, dados, callback);
