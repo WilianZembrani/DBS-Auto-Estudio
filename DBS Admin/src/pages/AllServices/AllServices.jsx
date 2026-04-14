@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 function AllServices() {
 
     const navigate = useNavigate()
+    const [search, setSearch] = useState('');
 
     function handleClick() {
         navigate('/dashboard/addservice')
@@ -19,7 +20,7 @@ function AllServices() {
 
     const loadOffices = async () => {
         try {
-            const data = await listOffices();
+            const data = await listOffices(search);
             setOffices(data);
         } catch (error) {
             console.log(error);
@@ -40,7 +41,7 @@ function AllServices() {
 
     useEffect(() => {
         loadOffices();
-    }, []);
+    }, [search]);
 
     return (
         <div className='table-cnt'>
@@ -48,7 +49,7 @@ function AllServices() {
             <p>Aqui nessa página você consegue acessar todos seus serviços</p>
             <div className='mini-nav'>
                 <div className='search-container'>
-                    <SearchBar />
+                    <SearchBar value={search} onChange={(e) => setSearch(e.target.value)} />
                 </div>
                 <select className='category'>
                     <option value="">Funcionario..</option>

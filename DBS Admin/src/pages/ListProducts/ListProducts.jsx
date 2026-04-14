@@ -77,6 +77,7 @@ function ListProducts() {
                                         <span>Produto</span>
                                     </div>
                                 </th>
+                                <th>Descrição</th>
                                 <th>Preço</th>
                                 <th>Categoria</th>
                                 <th>Estoque</th>
@@ -99,6 +100,7 @@ function ListProducts() {
                                             </span>
                                         </div>
                                     </td>
+                                    <td>{product.description}</td>
                                     <td>R$ {product.price}</td>
                                     <td>{product.category}</td>
                                     <td>{product.stock}</td>

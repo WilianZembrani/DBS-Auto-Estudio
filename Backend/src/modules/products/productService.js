@@ -18,8 +18,10 @@ exports.list = (search, callback) => {
   let values = [];
 
   if (search) {
-    sql += " WHERE p.name LIKE ?";
-    values.push(`%${search}%`);
+    sql += ` WHERE p.name LIKE ?
+             OR p.description LIKE ?
+             OR c.name LIKE ?;`;
+    values.push(`%${search}%`, `%${search}%`, `%${search}%`);
   }
 
   db.query(sql, values, callback);

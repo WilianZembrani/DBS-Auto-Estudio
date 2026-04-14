@@ -1,7 +1,9 @@
 const officeService = require("./officeService");
 
 exports.listOffices = (req, res) => {
-  officeService.list((err, results) => {
+  const search = req.query.search || "";
+
+  officeService.list(search, (err, results) => {
     if (err) {
       return res.status(500).send("Erro ao listar serviços");
     }

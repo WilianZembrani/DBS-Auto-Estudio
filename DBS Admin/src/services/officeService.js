@@ -1,6 +1,8 @@
-export async function listOffices() {
+export async function listOffices(search = "") {
   try {
-    const response = await fetch("http://localhost:3000/api/offices");
+    const response = await fetch(
+      `http://localhost:3000/api/offices?search=${search}`,
+    );
     if (!response.ok) {
       throw new Error("Erro ao listar serviços");
     }
