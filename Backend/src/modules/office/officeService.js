@@ -1,6 +1,6 @@
 const db = require("../../database/connection");
 
-exports.list = (search, callback) => {
+exports.list = (search, employee, callback) => {
   let sql = `
     SELECT 
       services.*, 
@@ -8,20 +8,29 @@ exports.list = (search, callback) => {
     FROM services
     LEFT JOIN users 
       ON services.employee_id = users.id
+    WHERE 1=1
   `;
+
   let values = [];
 
   if (search) {
     sql += `
-    WHERE services.name LIKE ?
-    OR services.description LIKE ?
-    OR users.name LIKE ?
-  `;
+      AND (
+        services.name LIKE ?
+        OR services.description LIKE ?
+        OR users.name LIKE ?
+      )
+    `;
     values.push(`%${search}%`, `%${search}%`, `%${search}%`);
   }
+
+  if (employee) {
+    sql += ` AND services.employee_id = ?`;
+    values.push(employee);
+  }
+
   db.query(sql, values, callback);
 };
-
 exports.create = (dados, callback) => {
   const sql = "INSERT INTO services SET ?";
   db.query(sql, dados, callback);

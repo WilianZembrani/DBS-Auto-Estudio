@@ -1,16 +1,16 @@
 const officeService = require("./officeService");
-
 exports.listOffices = (req, res) => {
   const search = req.query.search || "";
+  const employee = req.query.employee_id || "";
 
-  officeService.list(search, (err, results) => {
+  officeService.list(search, employee, (err, results) => {
     if (err) {
+      console.log(err); // importante pra debug
       return res.status(500).send("Erro ao listar serviços");
     }
     res.status(200).json(results);
   });
 };
-
 exports.createOffice = (req, res) => {
   const dados = req.body;
 

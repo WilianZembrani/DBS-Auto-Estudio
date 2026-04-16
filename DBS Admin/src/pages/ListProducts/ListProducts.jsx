@@ -1,9 +1,11 @@
-/* eslint-disable react-hooks/set-state-in-effect */
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import SearchBar from '../../components/SearchBar/SearchBar'
 import './ListProducts.css'
 import somIcon from '../../assets/iconSom.png'
 import { useState, useEffect } from 'react';
 import { listProducts, productDelete } from '../../services/productService';
+import { listCategories } from '../../services/categoryService';
 import ActionButtons from '../../components/ActionButtons/ActionButtons'
 import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
@@ -12,8 +14,21 @@ function ListProducts() {
 
     const navigate = useNavigate();
 
+    const [categories, setCategories] = useState([]);
+
     const [search, setSearch] = useState('');
     const [products, setProducts] = useState([]);
+
+    const fetchCategories = async () => {
+        try {
+            const data = await listCategories()
+            setCategories(data);
+
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
 
     const fetchProducts = async () => {
         try {
@@ -40,6 +55,7 @@ function ListProducts() {
 
     useEffect(() => {
         fetchProducts();
+        fetchCategories();
     }, [search]);
 
     return (
@@ -57,9 +73,12 @@ function ListProducts() {
                     <div className='product-list__filter-actions'>
                         <select className='product-list__select'>
                             <option>Filtrar por categoria</option>
-                            <option>Automovel</option>
-                            <option>Produtos</option>
-                            <option>Limpeza</option>
+                            {categories.map((category) => (
+                                <option key={category.id} value={category.name}>
+                                    {category.name}
+                                </option>
+                            ))}
+
                         </select>
 
                         <button className='product-list__clear-btn'>

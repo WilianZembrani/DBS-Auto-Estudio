@@ -1,11 +1,13 @@
-export async function listOffices(search = "") {
+export async function listOffices(search = "", employee = "") {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/offices?search=${search}`,
+      `http://localhost:3000/api/offices?search=${encodeURIComponent(search)}&employee_id=${encodeURIComponent(employee)}`,
     );
+
     if (!response.ok) {
       throw new Error("Erro ao listar serviços");
     }
+
     const data = await response.json();
     return data;
   } catch (error) {

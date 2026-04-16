@@ -10,17 +10,25 @@ import { toast } from "react-toastify";
 function AllServices() {
 
     const navigate = useNavigate()
-    const [search, setSearch] = useState('');
+    const [employee, setEmployee] = useState("")
+    const [search, setSearch] = useState("");
 
     function handleClick() {
         navigate('/dashboard/addservice')
     }
     const [offices, setOffices] = useState([]);
 
+    const uniqueEmployees = Object.values(
+        offices.reduce((acc, office) => {
+            acc[office.employee_id] = office;
+            return acc;
+        }, {})
+    );
+
 
     const loadOffices = async () => {
         try {
-            const data = await listOffices(search);
+            const data = await listOffices(search, employee);
             setOffices(data);
         } catch (error) {
             console.log(error);
@@ -41,7 +49,8 @@ function AllServices() {
 
     useEffect(() => {
         loadOffices();
-    }, [search]);
+
+    }, [search, employee]);
 
     return (
         <div className='table-cnt'>
@@ -51,11 +60,14 @@ function AllServices() {
                 <div className='search-container'>
                     <SearchBar value={search} onChange={(e) => setSearch(e.target.value)} />
                 </div>
-                <select className='category'>
+                <select value={employee} className='category' onChange={(e) => setEmployee(e.target.value)}>
                     <option value="">Funcionario..</option>
-                    <option value="">Pedro</option>
+                    {uniqueEmployees.map((office) => (
+                        <option key={office.employee_id} value={office.employee_id}>
+                            {office.employee_name}
+                        </option>
+                    ))}
                 </select>
-
                 <button onClick={handleClick}>+ Novo Serviço</button>
             </div>
 

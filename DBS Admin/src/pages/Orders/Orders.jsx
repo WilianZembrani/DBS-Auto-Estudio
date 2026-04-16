@@ -31,7 +31,7 @@ function Orders() {
                             <td className='orders__table-data orders__table-data--pending'>
                                 Pendente
                             </td>
-                            <td className='orders__table-data'>450.00</td>
+                            <td className='orders__table-data'>R$ 450.00</td>
                             <td className='orders__table-data'>
                                 <div className='actions'>
                                     <img title="Ver detalhes" className='actions__icon' src={lupeIcon} alt="" />
