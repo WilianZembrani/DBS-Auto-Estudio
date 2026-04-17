@@ -16,7 +16,9 @@ function ListProducts() {
 
     const [categories, setCategories] = useState([]);
 
+    const [category, setCategory] = useState("");
     const [search, setSearch] = useState('');
+
     const [products, setProducts] = useState([]);
 
     const fetchCategories = async () => {
@@ -32,8 +34,9 @@ function ListProducts() {
 
     const fetchProducts = async () => {
         try {
-            const data = await listProducts(search);
+            const data = await listProducts(search, category);
             setProducts(data);
+
         } catch (error) {
             console.error(error);
 
@@ -55,9 +58,11 @@ function ListProducts() {
 
     useEffect(() => {
         fetchProducts();
-        fetchCategories();
-    }, [search]);
+    }, [search, category]);
 
+    useEffect(() => {
+        fetchCategories();
+    }, []);
     return (
         <div className='product-list'>
             <h1 className='product-list__title'>Listar Produtos</h1>
@@ -71,17 +76,24 @@ function ListProducts() {
                     <SearchBar value={search} onChange={(e) => setSearch(e.target.value)} />
 
                     <div className='product-list__filter-actions'>
-                        <select className='product-list__select'>
-                            <option>Filtrar por categoria</option>
-                            {categories.map((category) => (
-                                <option key={category.id} value={category.name}>
-                                    {category.name}
+                        <select value={category} onChange={(e) => setCategory(e.target.value)} className='product-list__select'>
+                            <option value="">Filtrar por categoria</option>
+                            {categories?.map((cat) => (
+                                <option key={cat.id} value={cat.id}>
+                                    {cat.name}
                                 </option>
                             ))}
 
+
                         </select>
 
-                        <button className='product-list__clear-btn'>
+                        <button
+                            className='product-list__clear-btn'
+                            onClick={() => {
+                                setSearch("");
+                                setCategory("");
+                            }}
+                        >
                             Limpar filtros
                         </button>
                     </div>

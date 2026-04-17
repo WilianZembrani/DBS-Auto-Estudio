@@ -5,7 +5,7 @@ exports.listOffices = (req, res) => {
 
   officeService.list(search, employee, (err, results) => {
     if (err) {
-      console.log(err); // importante pra debug
+      console.log(err);
       return res.status(500).send("Erro ao listar serviços");
     }
     res.status(200).json(results);

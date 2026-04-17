@@ -1,31 +1,42 @@
 const db = require("../../database/connection");
 const { search } = require("./productRoutes");
 
-exports.list = (search, callback) => {
+exports.list = (search, category_id, callback) => {
   let sql = `
-    SELECT 
-      p.id,
-      p.name,
-      p.price,
-      p.stock,
-      p.description, 
-      p.category_id, 
-      c.name AS category
-    FROM products p
-    LEFT JOIN categories c ON p.category_id = c.id
+  SELECT 
+  p.id,
+  p.name,
+  p.price,
+  p.stock,
+  p.description,
+  p.category_id,
+  c.name AS category
+FROM products p
+LEFT JOIN categories c ON p.category_id = c.id
+WHERE 1=1
   `;
 
   let values = [];
 
   if (search) {
-    sql += ` WHERE p.name LIKE ?
-             OR p.description LIKE ?
-             OR c.name LIKE ?;`;
+    sql += `
+      AND (
+        p.name LIKE ?
+        OR p.description LIKE ?
+        OR c.name LIKE ?
+      )
+    `;
     values.push(`%${search}%`, `%${search}%`, `%${search}%`);
+  }
+
+  if (category_id) {
+    sql += ` AND p.category_id = ?`;
+    values.push(category_id);
   }
 
   db.query(sql, values, callback);
 };
+
 exports.create = (dados, callback) => {
   const sql = "INSERT INTO products SET ?";
   db.query(sql, dados, callback);
