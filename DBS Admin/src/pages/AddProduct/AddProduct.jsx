@@ -21,6 +21,13 @@ function AddProduct() {
     const [description, setDescription] = useState('');
     const [stock, setStock] = useState('');
     const [price, setPrice] = useState('');
+    const [images, setImages] = useState([]);
+
+    const handleAddImage = (file, index) => {
+        const newImages = [...images];
+        newImages[index] = file;
+        setImages(newImages);
+    };
 
 
 
@@ -57,14 +64,22 @@ function AddProduct() {
                 toast.success("Produto atualizado com sucesso!");
                 navigate("/dashboard/listproducts");
             } else {
-                await createProduct({
-                    name,
-                    category_id: Number(categoryId),
-                    description,
-                    stock: Number(stock),
-                    price: Number(price)
-                }
-                );
+                const formData = new FormData();
+
+                formData.append("name", name);
+                formData.append("category_id", Number(categoryId));
+                formData.append("description", description);
+                formData.append("stock", Number(stock));
+                formData.append("price", Number(price));
+
+
+                images.forEach((img) => {
+                    if (img) {
+                        formData.append("imagens", img);
+                    }
+                });
+
+                await createProduct(formData);
                 toast.success("Produto criado com sucesso!");
                 navigate("/dashboard/listproducts");
 
@@ -110,7 +125,11 @@ function AddProduct() {
 
                     <div className='up-box-2'>
                         {[...Array(4)].map((_, index) => (
-                            <UploadImage key={index} />
+                            <UploadImage
+                                key={index}
+                                image={images[index]}
+                                onChange={(file) => handleAddImage(file, index)}
+                            />
                         ))}
                     </div>
                     <p>SVG, PNG, JPG (máx 4 imagens)</p>

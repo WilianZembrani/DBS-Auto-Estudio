@@ -1,13 +1,31 @@
 import './UploadImage.css'
 import addIcon from '../../assets/add-img.png'
 
+function UploadImage({ onChange, image }) {
 
-function UploadImage() {
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            onChange(file);
+        }
+    };
+
     return (
-        <div className='upload-image'>
-            <img src={addIcon} alt="Adicionar imagem" />
-        </div>
+        <label className='upload-image'>
+            <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+            />
+
+            <img
+                src={image ? URL.createObjectURL(image) : addIcon}
+                alt="Preview"
+                className={image ? "preview-img" : "upload-icon"}
+            />
+        </label>
     )
 }
 
-export default UploadImage
+export default UploadImage;

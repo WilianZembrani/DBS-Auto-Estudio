@@ -1,6 +1,16 @@
 const db = require("../../database/connection");
 const { search } = require("./productRoutes");
 
+exports.saveImages = (productId, imagens, callback) => {
+  const values = imagens.map((url) => [productId, url]);
+
+  db.query(
+    "INSERT INTO product_images (product_id, url) VALUES ?",
+    [values],
+    callback,
+  );
+};
+
 exports.list = (search, category_id, callback) => {
   let sql = `
   SELECT 
