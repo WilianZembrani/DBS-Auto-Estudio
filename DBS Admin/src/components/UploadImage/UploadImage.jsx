@@ -20,7 +20,13 @@ function UploadImage({ onChange, image }) {
             />
 
             <img
-                src={image ? URL.createObjectURL(image) : addIcon}
+                src={
+                    image
+                        ? typeof image === "string"
+                            ? image
+                            : URL.createObjectURL(image)
+                        : addIcon
+                }
                 alt="Preview"
                 className={image ? "preview-img" : "upload-icon"}
             />

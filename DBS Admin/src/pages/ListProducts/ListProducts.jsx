@@ -123,11 +123,7 @@ function ListProducts() {
                                         <div className="product-list__product">
                                             <img
                                                 className="product-list__product-image"
-                                                src={
-                                                    product.images
-                                                        ? product.images.split(",")[0]
-                                                        : somIcon
-                                                }
+                                                src={product.images?.[0] || somIcon}
                                                 alt={product.name}
                                             />
                                             <span className="product-list__product-name">

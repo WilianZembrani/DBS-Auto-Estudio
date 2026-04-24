@@ -25,9 +25,6 @@ exports.createProduct = async (req, res) => {
       price: Number(req.body.price),
     };
 
-    console.log("BODY:", req.body);
-    console.log("FILES:", req.files);
-
     productService.create(dados, async (err, results) => {
       if (err) {
         console.log("ERRO AO CRIAR PRODUTO:", err);
@@ -59,37 +56,92 @@ exports.createProduct = async (req, res) => {
         }
       }
 
-      if (imagens.length > 0) {
-        productService.saveImages(productId, imagens, (err2) => {
-          if (err2) {
-            console.log("ERRO AO SALVAR IMAGENS:", err2);
-          } else {
-            console.log("IMAGENS SALVAS COM SUCESSO");
-          }
-        });
-      }
-
       return res.status(201).json({
         message: "Produto criado com sucesso",
         imagensSalvas: imagens.length,
       });
     });
   } catch (error) {
-    console.log("ERRO GERAL:", error);
     return res.status(500).json({ error: "Erro interno no servidor" });
   }
 };
 
 exports.updateProduct = (req, res) => {
-  const id = req.params.id;
-  const dados = req.body;
+  const id = Number(req.params.id);
 
-  productService.update(dados, id, (err, results) => {
+  const dados = {};
+
+  if (req.body.name !== undefined) {
+    dados.name = req.body.name;
+  }
+
+  if (req.body.category_id !== undefined) {
+    const categoryId = Number(req.body.category_id);
+    dados.category_id = isNaN(categoryId) ? null : categoryId;
+  }
+
+  if (req.body.description !== undefined) {
+    dados.description = req.body.description;
+  }
+
+  if (req.body.stock !== undefined) {
+    const stock = Number(req.body.stock);
+    dados.stock = isNaN(stock) ? 0 : stock;
+  }
+
+  if (req.body.price !== undefined) {
+    const price = Number(req.body.price);
+    dados.price = isNaN(price) ? 0 : price;
+  }
+
+  let imagens = [];
+
+  if (req.files && req.files.length > 0) {
+    let uploadsFinalizados = 0;
+
+    req.files.forEach((file) => {
+      cloudinary.uploader.upload(file.path, (err, result) => {
+        uploadsFinalizados++;
+
+        if (!err && result) {
+          imagens.push(result.secure_url);
+        }
+
+        if (uploadsFinalizados === req.files.length) {
+          if (imagens.length > 0) {
+            dados.images = imagens;
+          }
+
+          productService.update(id, dados, (err2, result2) => {
+            if (err2) {
+              console.log(err2);
+              return res
+                .status(500)
+                .json({ error: "Erro ao atualizar produto" });
+            }
+
+            return res.json({
+              message: "Produto atualizado com sucesso",
+              result: result2,
+            });
+          });
+        }
+      });
+    });
+
+    return;
+  }
+
+  productService.update(id, dados, (err, result) => {
     if (err) {
-      res.status(500).json({ error: "Erro ao atualizar produto" });
-    } else {
-      res.status(200).json({ message: "Produto atualizado com sucesso" });
+      console.log(err);
+      return res.status(500).json({ error: "Erro ao atualizar produto" });
     }
+
+    return res.json({
+      message: "Produto atualizado com sucesso",
+      result,
+    });
   });
 };
 

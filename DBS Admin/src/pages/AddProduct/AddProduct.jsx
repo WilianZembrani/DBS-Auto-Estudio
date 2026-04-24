@@ -7,13 +7,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createProduct, updateProduct } from '../../services/productService';
 
-
 function AddProduct() {
     const location = useLocation();
     const productEdit = location.state;
     const navigate = useNavigate();
     const isEdit = productEdit ? true : false;
-
 
     const [categories, setCategories] = useState([]);
     const [name, setName] = useState('');
@@ -29,8 +27,6 @@ function AddProduct() {
         setImages(newImages);
     };
 
-
-
     const loadCategories = async () => {
         try {
             const data = await listCategories();
@@ -38,85 +34,85 @@ function AddProduct() {
         } catch (error) {
             console.error("Erro ao carregar categorias:", error);
         }
-    }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!name || !categoryId || !description || !stock || !price) {
-            toast.warn("Preencha todos os campos");
+        if (!name || !categoryId || categoryId === "") {
+            toast.warn("Nome e categoria são obrigatórios");
             return;
         }
 
-
         try {
+            const categoryNumber = Number(categoryId);
+
+
+            if (isNaN(categoryNumber)) {
+                toast.error("Categoria inválida");
+                return;
+            }
+
+            const formData = new FormData();
+
+            formData.append("name", name);
+            formData.append("description", description || "");
+            formData.append("category_id", categoryNumber);
+            formData.append("stock", stock ? Number(stock) : 0);
+            formData.append("price", price ? Number(price) : 0);
+
+            images.forEach((img) => {
+                if (img instanceof File) {
+                    formData.append("imagens", img);
+                }
+            });
+
             if (isEdit) {
-                await updateProduct(
-                    productEdit.id,
-                    {
-                        name,
-                        category_id: Number(categoryId),
-                        description,
-                        stock: Number(stock),
-                        price: Number(price)
-                    }
-                );
-                toast.success("Produto atualizado com sucesso!");
-                navigate("/dashboard/listproducts");
-            } else {
-                const formData = new FormData();
-
-                formData.append("name", name);
-                formData.append("category_id", Number(categoryId));
-                formData.append("description", description);
-                formData.append("stock", Number(stock));
-                formData.append("price", Number(price));
-
-
-                images.forEach((img) => {
-                    if (img) {
-                        formData.append("imagens", img);
-                    }
+                await updateProduct(productEdit.id, {
+                    name,
+                    category_id: categoryId,
+                    description,
+                    stock,
+                    price,
+                    images
                 });
-
+                toast.success("Produto atualizado com sucesso!");
+            } else {
                 await createProduct(formData);
                 toast.success("Produto criado com sucesso!");
-                navigate("/dashboard/listproducts");
-
-
             }
-            setName('');
-            setCategoryId('');
-            setDescription('');
-            setStock('');
-            setPrice('');
+
+            navigate("/dashboard/listproducts");
+
         } catch (error) {
-            toast.error("Erro ao criar produto");
+            toast.error("Erro ao salvar produto");
             console.error(error);
-
         }
-
-    }
+    };
 
     useEffect(() => {
         loadCategories();
-    }, [])
+    }, []);
 
     useEffect(() => {
-        if (productEdit) {
-            setName(productEdit.name);
-            setCategoryId(productEdit.category_id);
-            setDescription(productEdit.description);
-            setStock(productEdit.stock);
-            setPrice(productEdit.price);
-        }
-    }, [productEdit]);
+        if (!productEdit) return;
 
+        setName(productEdit.name || "");
+        setCategoryId(
+            productEdit.category_id
+                ? String(productEdit.category_id)
+                : ""
+        );
+        setDescription(productEdit.description || "");
+        setStock(productEdit.stock ?? "");
+        setPrice(productEdit.price ?? "");
+        setImages(productEdit.images || []);
+    }, [productEdit]);
 
     return (
         <div className='product-cnt'>
             <h1>{isEdit ? "Editar Produto" : "Adicionar Produto"}</h1>
-            <p>Aqui você pode adicionar um novo produto a loja. Preencha os detalhes do Produto e clique em 'Adicionar' para salvar.</p>
+            <p>Aqui você pode adicionar um novo produto a loja.</p>
 
             <div className='cnt-0'>
 
@@ -132,20 +128,31 @@ function AddProduct() {
                             />
                         ))}
                     </div>
+
                     <p>SVG, PNG, JPG (máx 4 imagens)</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className='product-form'>
 
                     <div className='form-group'>
-                        <label >Nome do Produto</label>
-                        <input type="text" placeholder='Pneu..' value={name} onChange={(e) => setName(e.target.value)} />
+                        <label>Nome do Produto</label>
+                        <input
+                            type="text"
+                            placeholder='Pneu..'
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
                     </div>
 
                     <div className='form-group'>
                         <label>Categoria</label>
-                        <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
-                            <option>Selecione uma categoria</option>
+                        <select
+                            value={categoryId}
+                            onChange={(e) => setCategoryId(e.target.value)}
+                        >
+
+                            <option value="" >Selecione uma categoria</option>
+
                             {categories.map((cat) => (
                                 <option key={cat.id} value={cat.id}>
                                     {cat.name}
@@ -156,17 +163,31 @@ function AddProduct() {
 
                     <div className='form-group'>
                         <label>Descrição</label>
-                        <textarea placeholder='Pneu 0KM..' value={description} onChange={(e) => setDescription(e.target.value)} />
+                        <textarea
+                            placeholder='Pneu 0KM..'
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
                     </div>
 
                     <div className='form-group'>
                         <label>Estoque</label>
-                        <input type="number" placeholder='10..' value={stock} onChange={(e) => setStock(e.target.value)} />
+                        <input
+                            type="number"
+                            placeholder='10..'
+                            value={stock}
+                            onChange={(e) => setStock(e.target.value)}
+                        />
                     </div>
 
                     <div className='form-group'>
                         <label>Preço</label>
-                        <input type="number" placeholder='250..' value={price} onChange={(e) => setPrice(e.target.value)} />
+                        <input
+                            type="number"
+                            placeholder='250..'
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                        />
                     </div>
 
                     <button className='submit-button' type='submit'>
@@ -175,8 +196,8 @@ function AddProduct() {
 
                 </form>
             </div>
-        </div >
-    )
+        </div>
+    );
 }
 
-export default AddProduct
+export default AddProduct;
